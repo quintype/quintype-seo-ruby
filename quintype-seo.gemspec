@@ -1,11 +1,12 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'quintype/api/version'
+require 'quintype/seo/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "quintype-seo-ruby"
+  spec.name          = "quintype-seo"
   spec.version       = Quintype::Seo::VERSION
+  spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Ramsharan"]
   spec.email         = ["sharangj@gmail.com"]
 

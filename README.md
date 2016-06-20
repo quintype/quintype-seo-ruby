@@ -1,15 +1,11 @@
-# Quintype::Api
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/quintype/api`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+# Quintype::SEO
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'quintype-api'
+gem 'quintype-seo'
 ```
 
 And then execute:
@@ -18,52 +14,33 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install quintype-api
+    $ gem install quintype-seo
 
 ## Usage
 
-### Establishing Connection
+### Fetching meta tag data for a page
 
-First, you must establish a connection, as follows
+You can fetch data for each page in the following way:
 
+Section:
 ```ruby
-Quintype::API::Client.establish_connection("http://sketches.quintype.com", Faraday.default_adapter)
+Quintype::Seo::Section.new(config, section).to_h
 ```
 
-### Subclassing API classes
-
-It is highly recommended that you subclass API sections. This is mostly honored during requests
-
+Home:
 ```ruby
-class QtConfig < Quintype::API::Config
-end
-
-class Story < Quintype::API::Story
-end
+Quintype::Seo::Home.new(config).to_h
 ```
 
-### Fetching the Config
-
+Story:
 ```ruby
-QtConfig.get.sections
+Quintype::Seo::Story.new(config, story).to_h
 ```
 
-### Fetching a story by slug
-
+Search and Topic:
 ```ruby
-Story.find_by_slug("5-timeless-truths-from-the-serenity-prayer-that-offer-wisdom")
-```
-
-### Bulk Fetching stories
-
-```ruby
-request = Quintype::API::Bulk.new
-request
-  .add_request("entertainment", Story.bulk_stories_request("top").add_params(section: "Entertainment"))
-  .add_request("sports", Story.bulk_stories_request("top").add_params(section: "Sports"))
-  .execute!
-entertainment_stories = request.get_response("entertainment")
-sports_stories = request.get_response("sports")
+Quintype::Seo::Search.new(config, search_term).to_h
+Quintype::Seo::Tag.new(config, search_term).to_h
 ```
 
 ## Development
@@ -74,5 +51,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/quintype/quintype-api-ruby.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/quintype/quintype-seo-ruby.
