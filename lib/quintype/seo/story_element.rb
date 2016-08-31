@@ -11,9 +11,9 @@ module Quintype::Seo
 
     def tags(metadata)
       title = get_title(metadata)
-      metadata.except('page_title').merge({
+      metadata.except('page-title').merge({
         'title' => title,
-        'canonical' => API::URL.story_canonical(config['root_url'], story),
+        'canonical' => API::URL.story_canonical(config['sketches-host'], story),
       })
     end
 

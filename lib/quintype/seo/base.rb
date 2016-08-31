@@ -6,7 +6,7 @@ module Quintype::Seo
       @config = config
       @page_type = page_type
       @page_identifier = page_identifier
-      @grouped_metadata = group_metadata(config['seo_metadata'])
+      @grouped_metadata = group_metadata(config['seo-metadata'])
     end
 
     def to_h
@@ -24,7 +24,7 @@ module Quintype::Seo
     end
 
     def group_metadata(metadata)
-      metadata.group_by { |m| [m['owner_type'], m['owner_id']] }
+      metadata.group_by { |m| [m['owner-type'], m['owner-id']] }
     end
   end
 end

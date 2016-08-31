@@ -9,7 +9,7 @@ module Quintype::Seo
 
     def tags(metadata)
       title = get_title(metadata)
-      metadata.except('page_title').merge({
+      metadata.except('page-title').merge({
         'title' => title,
         'description' => metadata['description'],
         'og' => {
@@ -20,9 +20,9 @@ module Quintype::Seo
           'title' => metadata['title'],
           'description' => metadata['description']
         },
-        'msvalidate.01' => Rodash.get(config, ['integrations', 'bing', 'app_id']),
+        'msvalidate.01' => Rodash.get(config, ['integrations', 'bing', 'app-id']),
         'fb' => {
-          'app_id' => Rodash.get(config, ['facebook', 'app_id'])
+          'app-id' => Rodash.get(config, ['facebook', 'app-id'])
         },
         'alternate' => [{
           'href' => '/feed',
@@ -33,7 +33,7 @@ module Quintype::Seo
     end
 
     def get_title(metadata)
-      metadata['page_title'].presence || config['title']
+      metadata['page-title'].presence || config['title']
     end
   end
 end
