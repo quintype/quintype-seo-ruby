@@ -6,9 +6,7 @@ module Quintype::Seo
       @story = story
     end
 
-    private
-
-    def tags(metadata)
+    def tags(metadata={})
       title = get_title(metadata)
       metadata.except('page-title').merge({
         'title' => title,
@@ -22,12 +20,14 @@ module Quintype::Seo
           'publisher' => Rodash.get(config , ['social-links', 'facebook-url'])
         },
         'msvalidate.01' => Rodash.get(config, ['integrations', 'bing', 'app-id']),
-        'canonical' => API::URL.story_canonical(config['sketches-host'], story),
+        'canonical' => "#{config['sketches-host']}/#{story['slug']}",
         'al:android:package' => Rodash.get(config, ['apps-data', 'al:android:package']),
         'al:android:app_name' => Rodash.get(config, ['apps-data', 'al:android:app_name']),
         'al:android:url' => "quintypefb://#{config['host']}/#{story['slug']}"
       })
     end
+
+    private
 
     def twitter_attributes
       {
@@ -45,7 +45,7 @@ module Quintype::Seo
       hash = {
         'title' => story['headline'],
         'type' => 'article',
-        'url' => API::URL.story_canonical(config['sketches-host'], story),
+        'url' => "#{config['sketches-host']}/#{story['slug']}",
         'site_name' => config['title'],
         'description' => story['summary'],
         'image' => (config['cdn-name'] + story['hero-image-s3-key']).gsub(" ", "%20")

@@ -13,7 +13,7 @@ module Quintype::Seo
       title = get_title(metadata)
       metadata.except('page-title').merge({
         'title' => title,
-        'canonical' => API::URL.story_canonical(config['sketches-host'], story),
+        'canonical' => "#{config['sketches-host']}/#{story['slug']}",
       })
     end
 
