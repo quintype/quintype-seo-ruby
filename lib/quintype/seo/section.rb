@@ -10,7 +10,7 @@ module Quintype::Seo
 
     def tags(metadata)
       title = get_title(metadata)
-      metadata.except('page_title').merge({
+      metadata.except('page-title').merge({
         'title' => title,
         'description' => metadata['description'],
         'og' => {
@@ -25,11 +25,11 @@ module Quintype::Seo
     end
 
     def get_title(metadata)
-      metadata['page_title'].presence || make_hyphenated_title
+      metadata['page-title'].presence || make_hyphenated_title
     end
 
     def make_hyphenated_title
-      (section['display_name'] || section['name']) + " - " + (config['title'] || '')
+      (section['display-name'] || section['name']) + " - " + (config['title'] || '')
     end
   end
 end
