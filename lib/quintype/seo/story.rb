@@ -23,7 +23,7 @@ module Quintype::Seo
         'canonical' => "#{config['sketches-host']}/#{story['slug']}",
         'al:android:package' => Rodash.get(config, ['apps-data', 'al:android:package']),
         'al:android:app_name' => Rodash.get(config, ['apps-data', 'al:android:app_name']),
-        'al:android:url' => "quintypefb://#{config['host']}/#{story['slug']}"
+        'al:android:url' => "quintypefb://#{config['sketches-host']}/#{story['slug']}"
       })
     end
 
