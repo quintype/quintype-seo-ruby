@@ -12,7 +12,7 @@ module Quintype::Seo
       title = get_title(metadata)
       metadata.except('page_title').merge({
         'title' => title,
-        'description' => story['summary'],
+        'description' => Rodash.get(story, ['seo', 'meta_description']).presence || story['summary'],
         'og' => og_attributes,
         'twitter' => twitter_attributes,
         'fb' => {
@@ -62,7 +62,7 @@ module Quintype::Seo
     end
 
     def get_title(metadata)
-      metadata['page_title'].presence || make_hyphenated_title
+      Rodash.get(story, ['seo', 'meta_title']).presence || make_hyphenated_title
     end
 
     def make_hyphenated_title
